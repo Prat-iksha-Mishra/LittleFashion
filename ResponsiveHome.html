@@ -1,1 +1,628 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+      body {
+        margin: 0;
+      }
+      .scrollable {
+        overflow: auto;
+        height: 100%;
+      }
+
+      .Header {
+        height: 90px;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 2fr 5fr 1fr;
+        align-items: center;
+        border: 1px solid rgb(211, 211, 211);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: white;
+      }
+
+      .Header-Third-Div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .Menu-Icon {
+        margin-left: 60px;
+        width: 30px;
+      }
+      .User-Icon {
+        width: 40px;
+      }
+      .Shopping-Icon {
+        width: 50px;
+      }
+      .Main-Header {
+        color: #ff4400;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 35px;
+      }
+
+      .carousel {
+        width: 100%;
+        height: 600px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 90px;
+      }
+
+      .carousel-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 1;
+      }
+
+      .carousel-image.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .carousel-text {
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        border-radius: 10px;
+        display: none;
+      }
+
+      .carousel-text.active {
+        display: block;
+      }
+
+      .Button-On-Image {
+        height: 40px;
+        width: 200px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-weight: 700;
+      }
+
+      .First-Text {
+        font-weight: 900;
+      }
+
+      .Second-Text {
+        font-weight: 100;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .Third-Body-Div {
+        display: flex;
+        width: 1200px;
+        height: 400px;
+        margin: 0 auto;
+      }
+
+      .Body-First-Heading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .Body-Second-Div-first-part {
+        width: 150px;
+        margin-right: 20px;
+        padding: 65px 50px;
+        border-left: 1px solid #e0e0e0;
+      }
+
+      .menu-item {
+        color: #ccc;
+        padding: 10px 0;
+        position: relative;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .menu-item.active {
+        color: #ff4500;
+        font-weight: bold;
+      }
+
+      .menu-item.active::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background-color: #ff4500;
+      }
+
+      .Body-Second-Div-third-part {
+        width: 350px;
+        height: 350px;
+        margin-left: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 1px 50px 10px;
+      }
+
+      .BodyImage {
+        width: 500px;
+      }
+
+      .Section-Fourth {
+        display: flex;
+      }
+
+      .Fourth-first,
+      .Fourth-Second {
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .Fourth-Second {
+        background-color: #f1fbff;
+        font-family: "Poppins", sans-serif;
+        color: #a7a7a7;
+      }
+
+      .FourthDivImage {
+        width: 100%;
+        height: auto;
+      }
+
+      .Product-1 {
+        width: 33.33%;
+        box-sizing: border-box;
+        padding: 10px;
+      }
+
+      .Section-Fifth {
+        margin: 40px auto;
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .OnHover:hover {
+        color: #ff4500;
+      }
+
+      /* --------- MOBILE RESPONSIVENESS --------- */
+      @media screen and (max-width: 768px) {
+        .Header {
+          grid-template-columns: 1fr 2fr 1fr;
+        }
+
+        .Main-Header,
+        .Header-Second-Div span {
+          font-size: 25px !important;
+        }
+
+        .carousel {
+          height: 300px;
+        }
+
+        .carousel-text {
+          top: 60%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 14px;
+          padding: 10px;
+        }
+
+        .Third-Body-Div {
+          flex-direction: column;
+          width: 100%;
+          height: auto;
+        }
+
+        .Body-Second-Div,
+        .Body-Second-Div-Second-part,
+        .Body-Second-Div-third-part {
+          width: 100%;
+          margin: 0;
+          padding: 20px;
+        }
+
+        .BodyImage {
+          width: 100%;
+        }
+
+        .Section-Fourth {
+          flex-direction: column;
+        }
+
+        .Fourth-first,
+        .Fourth-Second {
+          width: 100%;
+        }
+
+        .Product-1 {
+          width: 100%;
+        }
+
+        .Section-Fifth {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+
+        footer div {
+          flex-direction: column !important;
+          text-align: center;
+        }
+
+        footer > div > div {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body class="scrollable">
+    <body class="scrollable">
+        <div class="Header">
+          <div class="Header-First-Div">
+            <img src="/LittleFashion/Images/icons8-menu.svg" class="Menu-Icon" />
+          </div>
+          <div class="Header-Second-Div">
+            <p class="Main-Header" style="display: inline">Little</p>
+            <span
+              style="
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 700;
+                font-size: 35px;
+              " class="OnHover"
+              >Fashion</span
+            >
+          </div>
+          <div class="Header-Third-Div">
+            <img src="/LittleFashion/Images/user.png" class="User-Icon" />
+            <img src="/LittleFashion/Images/shopping-bag.png" class="Shopping-Icon" />
+          </div>
+        </div>
+        <div class="carousel">
+          <!-- Images -->
+          <img src="/LittleFashion/Images/Banner-1.jpg" class="carousel-image active" />
+          <img src="/LittleFashion/Images/Banner-2.jpg" class="carousel-image" />
+          <img src="/LittleFashion/Images/Banner-3.jpg" class="carousel-image" />
+    
+          <!-- Text blocks -->
+          <div class="carousel-text active">
+            <h1 class="First-Text">Welcome to <span class="OnHover">Little Fashion</span></h1>
+            <p class="Second-Text">Discover the latest trends</p>
+            <button class="Button-On-Image OnHover">SHOP NOW</button>
+          </div>
+    
+          <div class="carousel-text">
+            <h1 class="First-Text">New Arrivals Are Here</h1>
+            <p class="Second-Text">Check out our fresh collection</p>
+            <button class="Button-On-Image">EXPLORE PRODUCT</button>
+          </div>
+    
+          <div class="carousel-text">
+            <h1 class="First-Text">Style That Speaks</h1>
+            <p class="Second-Text">Upgrade your wardrobe today</p>
+            <button class="Button-On-Image">BROWSE NOW</button>
+          </div>
+        </div>
+    
+        <div class="Body-First-Heading">
+          <p class="OnHover"
+            style="
+              display: inline;
+              font-family: Arial, Helvetica, sans-serif;
+              font-weight: 900;
+              font-size: 35px;
+            "
+          >
+            Get started with
+            <span
+              style="
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 900;
+                font-size: 35px;
+                color: #ff4400;
+              "
+              >Little</span
+            >
+            Fashion
+          </p>
+        </div>
+        <div class="Third-Body-Div">
+          <div class="Body-Second-Div">
+            <div class="Body-Second-Div-first-part">
+              <p
+                style="color: gray"
+                class="menu-item active"
+                id="opt1"
+                onclick="RemoveActive(this)"
+              >
+                Introduction
+              </p>
+              <p
+                style="color: gray"
+                class="menu-item"
+                id="opt2"
+                onclick="RemoveActive(this)"
+              >
+                How we work??
+              </p>
+              <p
+                style="color: gray"
+                class="menu-item"
+                id="opt3"
+                onclick="RemoveActive(this)"
+              >
+                Capabilities
+              </p>
+            </div>
+          </div>
+          <div class="Body-Second-Div-Second-part">
+            <img class="BodyImage" src="/LittleFashion/Images/BodyImage.jpg" alt="" />
+          </div>
+          <div class="Body-Second-Div-third-part" id="opt11" style="display: block">
+            <h1 style="font-family: Arial, Helvetica, sans-serif">
+              Good
+              <span
+                style="font-family: Arial, Helvetica, sans-serif; color: #ff4400"
+                >Design</span
+              >
+              Ideas for
+              <span
+                style="font-family: Arial, Helvetica, sans-serif; color: #ff4400"
+                >your</span
+              >
+              fashion
+            </h1>
+            <p
+              style="
+                font-family: 'Poppins', sans-serif; /* or Roboto / Open Sans / Lato */
+                font-size: 16px;
+                color: #a7a7a7;
+              "
+            >
+              Little Fashion templates comes with sign in / sign up pages, product
+              listing / product detail, about, FAQs, and contact page. Since this
+              HTML template is based on Boostrap CSS library, you can feel free to
+              add more components as you need.
+            </p>
+            <span style="color: gray">Learn more about us</span>
+          </div>
+          <div class="Body-Second-Div-third-part" id="opt12" style="display: none">
+            <h1 style="font-family: Arial, Helvetica, sans-serif">
+              Life at Studio
+            </h1>
+            <p
+              style="
+                font-family: 'Poppins', sans-serif; /* or Roboto / Open Sans / Lato */
+                font-size: 16px;
+                color: #a7a7a7;
+              "
+            >
+              Over three years in business, We've had the chance to work on a
+              variety of projects, with companies Custom work is branding, web
+              design, UI/UX design
+            </p>
+            <span style="color: gray">Work with us</span>
+          </div>
+          <div class="Body-Second-Div-third-part" id="opt13" style="display: none">
+            <h1 style="font-family: Arial, Helvetica, sans-serif">
+              What can help you?
+            </h1>
+            <p
+              style="
+                font-family: 'Poppins', sans-serif; /* or Roboto / Open Sans / Lato */
+                font-size: 16px;
+                color: #a7a7a7;
+              "
+            >
+              Over three years in business, We've had the chance on projects
+            </p>
+            <ul
+              style="
+                font-family: 'Poppins', sans-serif; /* or Roboto / Open Sans / Lato */
+                font-size: 16px;
+                color: #a7a7a7;
+              "
+            >
+              <li>Branding <span>90%</span></li>
+              <li>Design & Stragety <span>70%</span></li>
+              <li>Online Platform <span>80%</span></li>
+            </ul>
+            <span style="color: gray">Explore products</span>
+          </div>
+        </div>
+    
+        <div class="Section-Fourth">
+          <div class="Fourth-first">
+            <img src="/LittleFashion/Images/BoyImahe.jpg" class="FourthDivImage" />
+          </div>
+          <div class="Fourth-Second">
+            <h1
+              style="color: black; font-weight: 900; font-size: 42px; margin: 50px"
+            >
+              <span style="color: #ff4500; font-weight: 900; font-size: 42px"
+                >Retail</span
+              >
+              shop owners
+            </h1>
+            <p style="margin: 50px">
+              Credits go to Unsplash and FreePik websites for images used in this
+              Little Fashion by Tooplate. Explore Products
+            </p>
+            <a style="margin: 50px; color: rgb(27, 27, 27)"> Explore Products </a>
+          </div>
+        </div>
+        <h1 class="OnHover"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+          "
+        >
+          Featured Products
+        </h1>
+        <div class="Section-Fifth" >
+          <div class="Product-1" style="position: relative;">
+            <img id="myImage1" src="/LittleFashion/Images/heart.svg" style="width:30px; position:absolute;top: 10px;left:250px" onclick="AddToCart(this.id)" >
+            <div>
+              <img src="/LittleFashion/Images/Product-1.jpg" style="width: 300px;  border-radius: 10px;" />
+            </div>
+            <div style="display: flex; align-items:center;">
+              <div>
+                <h1>Tree pot</h1>
+                <span style="font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        color: #a7a7a7;">Original package design from house</span>
+              </div>
+              <div>
+                <span style="font-family: 'Poppins', sans-serif;
+                font-size: 14px;
+                color: #a7a7a7;">$45</span>
+              </div>
+            </div>
+            
+          </div>
+          <div class="Product-1" style="position: relative;">
+            <img id="myImage2" src="/LittleFashion/Images/heart.svg" style="width:30px; position:absolute ;top: 10px;left:250px" onclick="AddToCart(this.id)" >
+            <div>
+              <img src="/LittleFashion/Images/Product-2.jpg" style="width: 300px ;border-radius: 10px;"" />
+            </div>
+            <div style="display: flex; align-items:center;">
+              <div>
+                <h1>Fashion Set</h1>
+                <span style="font-family: 'Poppins', sans-serif;
+                font-size: 14px;
+                color: #a7a7a7;">Costume Package for Five years</span>
+              </div>
+              <div>
+                <span style="font-family: 'Poppins', sans-serif;
+                font-size: 14px;
+                color: #a7a7a7;">$45</span>
+              </div>
+            </div> 
+            
+          </div>
+          <div class="Product-1" style="position: relative;">
+            <img id="myImage3" src="/LittleFashion/Images/heart.svg" style="width:30px; position:absolute ;top: 10px;left:250px" onclick="AddToCart(this.id)" >
+            <div>
+              <img src="/LittleFashion/Images/Product-3.jpg" style="width: 300px;border-radius: 10px;"" />
+            </div>
+            <div style="display: flex; align-items:center;">
+              <div>
+                <h1>Juice Drinks</h1>
+                <span style="font-family: 'Poppins', sans-serif;
+                font-size: 14px;
+                color: #a7a7a7;">Package Juicy Drinks For Everyone</span>
+              </div>
+              <div>
+                <span style="font-family: 'Poppins', sans-serif;
+                font-size: 14px;
+                color: #a7a7a7;">$45</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+          <div>
+            <footer style="background-color: #000; color: #fff; padding: 40px 20px;">
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1200px; margin: auto;">
+                
+                <!-- Logo Section -->
+                <div style="flex: 1; min-width: 200px;">
+                  <h2 style="color: #888; font-weight: normal;">Little <span style="color: #fff; font-weight: bold;">Fashion</span></h2>
+                  <p>Copyright © 2045 <strong>Little Fashion</strong></p>
+                  <p>Designed by Tooplate</p>
+                </div>
+            
+                <!-- Sitemap Section -->
+                <div style="flex: 1; min-width: 200px;">
+                  <h3 style="font-weight: bold;">Sitemap</h3>
+                  <p><a href="#" style="color: #aaa; text-decoration: none;">Story</a></p>
+                  <p><a href="#" style="color: #aaa; text-decoration: none;">Privacy policy</a></p>
+                  <p><a href="#" style="color: #aaa; text-decoration: none;">Contact</a></p>
+                </div>
+            
+                <div style="flex: 1; min-width: 200px;">
+                  <br>
+                  <p><a href="#" style="color: #aaa; text-decoration: none;">Products</a></p>
+                  <p><a href="#" style="color: #aaa; text-decoration: none;">FAQs</a></p>
+                </div>
+            
+                <!-- Social Section -->
+                <div style="flex: 1; min-width: 200px;">
+                  <h3 style="font-weight: bold;">Social</h3>
+                  <div style="display: flex; gap: 10px; font-size: 20px;">
+                    <a href="#"><i class="fab fa-youtube" style="color: #aaa;"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp" style="color: #aaa;"></i></a>
+                    <a href="#"><i class="fab fa-instagram" style="color: #aaa;"></i></a>
+                    <a href="#"><i class="fab fa-skype" style="color: #aaa;"></i></a>
+                  </div>
+                </div>
+            
+              </div>
+            </footer>
+            
+          </div>
+    <script>
+      // Carousel script
+      const images = document.querySelectorAll(".carousel-image");
+      const texts = document.querySelectorAll(".carousel-text");
+      let current = 0;
+      function cycle() {
+        images[current].classList.remove("active");
+        texts[current].classList.remove("active");
+        current = (current + 1) % images.length;
+        images[current].classList.add("active");
+        texts[current].classList.add("active");
+      }
+      setInterval(cycle, 4000);
+
+      // Tab menu switching
+      function RemoveActive(el) {
+        document.querySelectorAll(".menu-item").forEach(e => e.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("opt11").style.display = "none";
+        document.getElementById("opt12").style.display = "none";
+        document.getElementById("opt13").style.display = "none";
+        if (el.id === "opt1") document.getElementById("opt11").style.display = "block";
+        else if (el.id === "opt2") document.getElementById("opt12").style.display = "block";
+        else if (el.id === "opt3") document.getElementById("opt13").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
